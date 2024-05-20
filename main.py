@@ -1,5 +1,5 @@
 # from models import AddressBook, NoteBook, Record, Note
-# from utils import save_data, load_data
+from utils import save_data, load_data
 from typing import List, Tuple
 # import re
 # from colorama import Fore, Style, init
