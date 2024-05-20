@@ -1,5 +1,5 @@
 from collections import UserDict
-import re
+import re 
 from datetime import datetime, timedelta
 from colorama import Fore, Style
 
@@ -20,6 +20,7 @@ class Name(Field):
 
 class Phone(Field):
     def __init__(self, phone_number):
+        #Validate phone number format
         if not re.fullmatch(r"\d{10}", phone_number):
             raise ValueError("Phone number must be 10 digits.")
             return
@@ -28,6 +29,7 @@ class Phone(Field):
 
 class Email(Field):
     def __init__(self, email):
+        # Validate email format
         if not re.fullmatch(r"[^@]+@[^@]+\.[^@]+", email):
             raise ValueError("Invalid email format.")
         super().__init__(email)
