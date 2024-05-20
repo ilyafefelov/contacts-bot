@@ -6,7 +6,7 @@ from typing import List, Tuple
 
 # init()
 
-# AUTOSAVE_INTERVAL = 5  # Save after every 5 commands
+AUTOSAVE_INTERVAL = 5  # Save after every 5 commands
 
 
 def parse_input(user_input: str) -> Tuple[str, List[str]]:
