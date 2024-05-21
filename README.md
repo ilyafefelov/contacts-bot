@@ -22,6 +22,17 @@ python -m src.main
 ```
 
 
+Run Install (edit mode):
+
+```pip install -e .```
+
+Run :
+
+```contact_bot```
+
+
+
+
 Run Tests:
 Use unittest to run the tests.
 

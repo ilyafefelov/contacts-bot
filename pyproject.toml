@@ -3,24 +3,26 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "contact_bot"
+name = "contacts-bot"
 version = "0.1.0"
-description = "A contact and note management bot"
+description = "A contacts bot for managing contacts"
 readme = "README.md"
-requires-python = ">=3.7"
 license = { file = "LICENSE" }
 authors = [
-  { name = "Your Name", email = "your.email@example.com" }
+  { name = "Ilya Fefelov", email = "ilya@example.com" }
 ]
-
-[project.urls]
-Homepage = "https://example.com/"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+dependencies = [
+  "colorama>=0.4.4"
+]
+requires-python = ">=3.6"
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["."]
 
-[project.dependencies]
-colorama = "^0.4.4"
-
-[tool.setuptools.scripts]
-contact_bot = "src.main:main"
+[project.scripts]
+contact_bot = "main:main"
