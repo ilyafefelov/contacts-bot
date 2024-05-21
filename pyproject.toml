@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "contact_bot"
+version = "0.1.0"
+description = "A contact and note management bot"
+readme = "README.md"
+requires-python = ">=3.7"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Your Name", email = "your.email@example.com" }
+]
+
+[project.urls]
+Homepage = "https://example.com/"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.dependencies]
+colorama = "^0.4.4"
+
+[tool.setuptools.scripts]
+contact_bot = "src.main:main"
