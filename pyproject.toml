@@ -25,4 +25,4 @@ requires-python = ">=3.6"
 where = ["."]
 
 [project.scripts]
-contact_bot = "main:main"
+contact_bot = "src.main:main"
