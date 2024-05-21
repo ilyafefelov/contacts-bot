@@ -11,18 +11,23 @@ Install Dependencies:
 Install the required packages from requirements.txt.
 
 
-pip install -r requirements.txt
+```pip install -r requirements.txt```
+
+
+
 Run the Project:
 Use the python -m command with the module path to run the main script.
-
-
+```
 python -m src.main
+```
+
+
 Run Tests:
 Use unittest to run the tests.
 
+```python -m unittest discover tests```
 
-python -m unittest discover tests
-This setup ensures a modular and maintainable project structure, with clear separation of different 
+
 
 contact_bot/
 ├── src/
