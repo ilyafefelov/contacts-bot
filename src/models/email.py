@@ -1,5 +1,5 @@
 import re
-from field import Field
+from src.models.field import Field
 
 
 class Email(Field):

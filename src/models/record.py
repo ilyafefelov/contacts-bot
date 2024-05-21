@@ -1,7 +1,6 @@
 from datetime import datetime
-from src.models.fields import Name, Phone, Address, Birthday
-#from fields import Name, Phone, Birthday
-#from email import Email
+from src.models.fields import Name, Phone, Birthday
+from src.models.email import Email
 from colorama import Fore, Style
 
 class Record:
@@ -42,7 +41,7 @@ class Record:
             if self.birthday
             else "No birthday set"
         )
-        email = self.email.value if self.email else "No email set"
+        email = self.email if self.email else "No email set"
         address = self.address.value if self.address else "No address set"
         return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address: {address}"
 
