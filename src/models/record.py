@@ -1,5 +1,7 @@
 from datetime import datetime
-from src.models.fields import Name, Phone, Email, Address, Birthday
+from src.models.fields import Name, Phone, Address, Birthday
+#from fields import Name, Phone, Birthday
+#from email import Email
 from colorama import Fore, Style
 
 class Record:
@@ -18,9 +20,12 @@ class Record:
         return f"{Fore.GREEN}Phone {phone} added to {self.name.value}.{Style.RESET_ALL}"
         return [p.value for p in self.phones]
 
-    def add_email(self, email):
+    def add_email(self, email: str) -> str:
         self.email = Email(email)
         return f"Email {email} added to {self.name.value}."
+    
+    def show_email(self) -> str:
+        return self.email
 
     def add_address(self, address):
         self.address = Address(address)
@@ -40,3 +45,13 @@ class Record:
         email = self.email.value if self.email else "No email set"
         address = self.address.value if self.address else "No address set"
         return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address: {address}"
+
+
+
+r = Record("tom")
+print(r)
+r.add_phone('1234567890')
+print(r)
+r.show_email()
+r.add_email("fghhrk@ukr.net")
+print(r)
