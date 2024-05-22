@@ -1,7 +1,5 @@
 import re
-#from src.models.field import Field
-from field import Field
-
+from src.models.field import Field
 
 class Email(Field):
     """
@@ -32,8 +30,8 @@ class Email(Field):
 
 
 # Driver Code
-if __name__ == '__main__':
-    # Enter the email
-    email = Email("ankitrai326@gmail.com")
-    print(email)
- 
+# if __name__ == '__main__':
+#     # Enter the email
+#     email = Email("ankitrai326@gmail.com")
+#     print(email)
+

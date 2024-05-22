@@ -147,9 +147,9 @@ def birthdays(args, book):
         return "No upcoming birthdays."
 
 
-book = AddressBook()
-c = add_contact("Tom")
-print(c)
-print(add_email("Tom", "riine@ukr.net", book))
-print(c)
-print(book)
+# book = AddressBook()
+# c = add_contact("Tom")
+# print(c)
+# print(add_email("Tom", "riine@ukr.net", book))
+# print(c)
+# print(book)

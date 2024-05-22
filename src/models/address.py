@@ -1,7 +1,6 @@
 
 import pyap
-#from src.models.field import Field
-from field import Field
+from src.models.field import Field
 
 class Address(Field):
     """ creates dictionary with address details from provided string """
@@ -25,10 +24,10 @@ class Address(Field):
             
     def __str__(self):
         address_detail = (f"street:      {self.address["street"]}  {'\n'}"
-             f"city:        {self.address["city"]} {'\n'}"
-             f"postal_code: {self.address["postal_code"]} {'\n'}"
-             f"state:       {self.address["state"]} {'\n'}"
-             f"country:     {self.address["country"]}")
+            f"city:        {self.address["city"]} {'\n'}"
+            f"postal_code: {self.address["postal_code"]} {'\n'}"
+            f"state:       {self.address["state"]} {'\n'}"
+            f"country:     {self.address["country"]}")
 
         return address_detail
 
@@ -36,9 +35,9 @@ class Address(Field):
 
 
 # # Driver Code
-if __name__ == '__main__':
-    test_address = """
-        Lorem ipsum, 225 E. John Carpenter Freeway, Suite 1500 Irving, Texas 75062, Dorem sit amet
-        """
-    address = Address(test_address)
-    print(address)
+# if __name__ == '__main__':
+#     test_address = """
+#         Lorem ipsum, 225 E. John Carpenter Freeway, Suite 1500 Irving, Texas 75062, Dorem sit amet
+#         """
+#     address = Address(test_address)
+#     print(address)
