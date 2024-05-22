@@ -41,6 +41,19 @@ class Record:
         self.birthday = Birthday(birthday)
         return f"Birthday {birthday} added to {self.name.value}."
 
+    def add_address(self, address: str) -> str:
+        self.address = Address(address)
+        return f"Address added to {self.name.value}"
+    
+    def show_address(self) -> str:
+        return self.address
+    
+    def change_address(self, new_address: str) -> None:
+        self.add_address = new_address
+
+    def delete_address(self) -> None:
+        self.address = None
+
     def __str__(self):
         phones = "; ".join(p.value for p in self.phones)
         birthday = (
