@@ -18,11 +18,11 @@ class Phone(Field):
             raise ValueError("Phone number must be 10 digits.")
         super().__init__(phone_number)
 
-class Email(Field):
-    def __init__(self, email):
-        if not re.fullmatch(r"[^@]+@[^@]+\.[^@]+", email):
-            raise ValueError("Invalid email format.")
-        super().__init__(email)
+# class Email(Field):
+#     def __init__(self, email):
+#         if not re.fullmatch(r"[^@]+@[^@]+\.[^@]+", email):
+#             raise ValueError("Invalid email format.")
+#         super().__init__(email)
 
 class Address(Field):
     pass
