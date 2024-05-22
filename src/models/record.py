@@ -67,11 +67,11 @@ class Record:
 
 
 
-r = Record("tom")
-print(r)
-r.add_phone('1234567890')
-print(r)
-r.show_email()
-r.add_email("fghhrk@ukr.net")
-print(r)
-print(r.show_email())
+# r = Record("tom")
+# print(r)
+# r.add_phone('1234567890')
+# print(r)
+# r.show_email()
+# r.add_email("fghhrk@ukr.net")
+# print(r)
+# print(r.show_email())
