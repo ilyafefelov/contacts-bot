@@ -116,3 +116,25 @@ def birthdays(args, book):
         return "Upcoming birthdays: " + ", ".join(birthdays)
     else:
         return "No upcoming birthdays."
+
+@input_error
+def add_address(args, book: AddressBook) -> str:
+    """" add address for requested name in contacts"""
+    name, address, *_ = args
+    record: Record = book.find(name)
+    record.add_address(address)
+    return "Address added"
+
+@input_error
+def change_address(args, book: AddressBook) -> str:
+    name, new_address, *_ = args
+    record: Record = book.find(name)
+    record.change_address(new_address)
+    return "Address updated"
+
+@input_error
+def delete_address(args, book: AddressBook) -> str:
+    name, *_ = args
+    record: Record = book.find(name)
+    record.delete_address()
+    return "Address deleted"

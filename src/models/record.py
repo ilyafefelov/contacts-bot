@@ -1,5 +1,6 @@
 from datetime import datetime
 from src.models.fields import Name, Phone, Email, Address, Birthday
+from src.models.address import Address
 from colorama import Fore, Style
 
 class Record:
@@ -29,6 +30,19 @@ class Record:
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
         return f"Birthday {birthday} added to {self.name.value}."
+
+    def add_address(self, address: str) -> str:
+        self.address = Address(address)
+        return f"Address added to {self.name.value}"
+    
+    def show_address(self) -> str:
+        return self.address
+    
+    def change_address(self, new_address: str) -> None:
+        self.add_address = new_address
+
+    def delete_address(self) -> None:
+        self.address = None
 
     def __str__(self):
         phones = "; ".join(p.value for p in self.phones)
