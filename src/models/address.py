@@ -1,8 +1,9 @@
 
 import pyap
+#from src.models.field import Field
+from field import Field
 
-
-class Address:
+class Address(Field):
     """ creates dictionary with address details from provided string """
     def __init__(self, address: str) -> dict:
         self.__address = {}

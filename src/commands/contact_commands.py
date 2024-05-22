@@ -46,6 +46,14 @@ def add_contact(args, book: AddressBook) -> str:
     return f"{message} {name}"
 
 @input_error
+def add_email(args, book: AddressBook) -> str:
+    """ add email for requested name in contacts"""
+    name, email, *_ = args
+    record: Record = book.find(name)
+    record.add_email(email)
+    return "Email added"
+
+@input_error
 def change_contact(args, book):
     if len(args) != 3:
         raise ValueError("Please provide the contact name, old phone number, and new phone number.")
@@ -54,12 +62,26 @@ def change_contact(args, book):
     return record.edit_phone(old_phone, new_phone)
 
 @input_error
+def change_email(args, book: AddressBook) -> str:
+    name, new_email, *_ = args
+    record: Record = book.find(name)
+    record.change_email(new_email)
+    return "Email updated"
+
+@input_error
 def show_phone(args, book):
     if len(args) != 1:
         raise ValueError("Please provide exactly one contact name.")
     name = args[0]
     record = book.find(name)
     return f"{name}'s numbers are: {', '.join(phone.value for phone in record.phones)}"
+
+@input_error
+def show_email(args, book: AddressBook) -> str:
+    name, *_ = args
+    record: Record = book.find(name)
+    email = record.show_email()
+    return f"{name}'s email: {email}" 
 
 @input_error
 def show_all(book):
@@ -86,6 +108,13 @@ def delete_contact(args, book):
     name = args[0]
     result = book.delete(name)
     return f"Contact {name} deleted successfully."
+
+@input_error
+def delete_email(args, book) -> str:
+    name, *_ = args
+    record: Record = book.find(name)
+    record.delete_email()
+    return "Email deleted"
 
 @input_error
 def add_birthday(args, book):
@@ -116,3 +145,11 @@ def birthdays(args, book):
         return "Upcoming birthdays: " + ", ".join(birthdays)
     else:
         return "No upcoming birthdays."
+
+
+book = AddressBook()
+c = add_contact("Tom")
+print(c)
+print(add_email("Tom", "riine@ukr.net", book))
+print(c)
+print(book)

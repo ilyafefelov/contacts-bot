@@ -1,6 +1,7 @@
 from datetime import datetime
 from src.models.fields import Name, Phone, Birthday
-from src.models.email import Email
+from src.models.email_ import Email
+from src.models.address import Address
 from colorama import Fore, Style
 
 class Record:
@@ -25,6 +26,12 @@ class Record:
     
     def show_email(self) -> str:
         return self.email
+    
+    def change_email(self, new_email: str) -> None:
+        self.email = new_email
+
+    def delete_email(self) -> None:
+        self.email = None
 
     def add_address(self, address):
         self.address = Address(address)
@@ -54,3 +61,4 @@ print(r)
 r.show_email()
 r.add_email("fghhrk@ukr.net")
 print(r)
+print(r.show_email())
