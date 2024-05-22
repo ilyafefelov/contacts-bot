@@ -1,3 +1,5 @@
+from prompt_toolkit import PromptSession
+from prompt_toolkit.completion import WordCompleter
 from src.commands.contact_commands import (
     add_contact, change_contact, show_phone, show_all, search_phone, delete_contact,
     add_birthday, show_birthday, birthdays
@@ -18,6 +20,16 @@ def parse_input(user_input: str) -> Tuple[str, List[str]]:
     cmd, *args = user_input.split()
     return cmd, args
 
+# List of available commands
+commands = [
+    "hello", "add", "add-birthday", "show-birthday", "birthdays", "change", "phone", "all", "search", "delete", "add-note", "search-notes", "delete-note", "help"
+]
+
+# Creating an object for autocompletion
+command_completer = WordCompleter(commands, ignore_case=True)
+
+# Creating a prompt_toolkit session
+session = PromptSession(completer=command_completer)
 
 
 def main():
@@ -27,7 +39,7 @@ def main():
     print("Welcome. I am an assistant bot!")
 
     while True:
-        user_input = input("Enter a command: ").strip()  # Prompt the user for input
+        user_input = session.prompt("Enter a command: ").strip()  # Prompt the user for input
 
         if not user_input:  # Check if the user entered an empty string
             print("Please enter a command.")
