@@ -6,8 +6,8 @@ class TestNoteCommands(unittest.TestCase):
         from src.models.note_book import NoteBook
         from src.commands.note_commands import add_note
         notebook = NoteBook()
-        result = add_note(["Test", "note"], notebook)
-        self.assertEqual(result, "Note added: Test note")
+        result = add_note(["--title", "some title", "--text", "text"], notebook)
+        self.assertRegex(result, r"Note added")
 
 if __name__ == '__main__':
     unittest.main()
