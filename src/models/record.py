@@ -65,7 +65,7 @@ class Record:
         address = self.address.value if self.address else "No address set"
         return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address: {address}"
 
-    def change_birthdate(self, new_birthday: str) -> None:
+    def change_birthday(self, new_birthday: str) -> None:
         self.birthday = Birthday(new_birthday)
 
     def change_phone(self, old_phone: str, new_phone: str) -> None:
@@ -76,7 +76,7 @@ class Record:
         raise ValueError(f"Phone {old_phone} not found for {self.name.value}")
 
     def delete_phone(self, phone: str) -> None:
-        for p in self.phphnes:
+        for p in self.phones:
             if p.value == phone:
                 self.phones.remove(p)
                 return
