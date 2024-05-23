@@ -7,7 +7,6 @@ commands = [
     "add-birthday",
     "show-birthday",
     "birthdays",
-    "change",
     "delete-phone",
     "change-phone",
     "change-birthday",

@@ -138,7 +138,9 @@ def main():
 
             result = switcher.get(
                 command,
-                lambda: "Invalid command. Available commands: hello, add, add-birthday, show-birthday, birthdays, change, phone, all, search, delete, add-note, edit-note, search-notes, delete-note, close, exit & help",
+                lambda: """Invalid command. Available commands: hello, add, add-birthday, show-birthday, change-birthday, birthdays, 
+                change-phone, delete-phone, phone, all, search, delete, add-note, get-note, edit-note, add-note-tag, delete-note-tag,
+                search-notes, list-notes, delete-note, close, exit & help""",
             )
 
             return result() if callable(result) else result
