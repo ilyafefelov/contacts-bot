@@ -55,7 +55,7 @@ def change_phone(args, book):
         )
     name, old_phone, new_phone = args
     record: Record = book.find(name)
-    return record.edit_phone(old_phone, new_phone)
+    return record.change_phone(old_phone, new_phone)
 
 
 @input_error
@@ -218,4 +218,3 @@ def delete_address(args, book: AddressBook) -> str:
     record: Record = book.find(name)
     record.delete_address()
     return "Address deleted"
-

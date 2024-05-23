@@ -19,7 +19,6 @@ class Record:
             return f"{Fore.MAGENTA}Phone {phone} already exists for {self.name.value}.{Style.RESET_ALL}"
         self.phones.append(new_phone)
         return f"{Fore.GREEN}Phone {phone} added to {self.name.value}.{Style.RESET_ALL}"
-        
 
     def add_email(self, email: str) -> str:
         self.email = Email(email)
@@ -33,8 +32,6 @@ class Record:
 
     def delete_email(self) -> None:
         self.email = None
-
-
 
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
@@ -75,7 +72,7 @@ class Record:
         for phone in self.phones:
             if phone.value == old_phone:
                 phone.value = new_phone
-                return
+                return f"{Fore.YELLOW}Phone {old_phone} changed to {new_phone}.{Style.RESET_ALL}"
         raise ValueError(f"Phone {old_phone} not found for {self.name.value}")
 
     def delete_phone(self, phone: str) -> None:
