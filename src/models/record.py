@@ -18,7 +18,7 @@ class Record:
             return f"{Fore.MAGENTA}Phone {phone} already exists for {self.name.value}.{Style.RESET_ALL}"
         self.phones.append(new_phone)
         return f"{Fore.GREEN}Phone {phone} added to {self.name.value}.{Style.RESET_ALL}"
-        return [p.value for p in self.phones]
+        
 
     def add_email(self, email: str) -> str:
         self.email = Email(email)
@@ -33,9 +33,7 @@ class Record:
     def delete_email(self) -> None:
         self.email = None
 
-    def add_address(self, address):
-        self.address = Address(address)
-        return f"Address {address} added to {self.name.value}."
+
 
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
@@ -63,7 +61,11 @@ class Record:
         )
         email = self.email if self.email else "No email set"
         address = self.address if self.address else "No address set"
-        return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address: {address}"
+        contact_detail = (
+            f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address:\n"
+            f"{address}"
+            )
+        return contact_detail
 
     def change_birthday(self, new_birthday: str) -> None:
         self.birthday = Birthday(new_birthday)

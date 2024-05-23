@@ -13,6 +13,14 @@ from src.commands.contact_commands import (
     add_birthday,
     show_birthday,
     birthdays,
+    add_email,
+    show_email,
+    change_email,
+    delete_email,
+    add_address,
+    show_address,
+    change_address,
+    delete_address
 )
 
 from src.commands.note_commands import add_note, search_notes, delete_note, list_notes, edit_note, get_note_by_id, add_note_tag, delete_note_tag
@@ -96,6 +104,15 @@ def main():
                 "search-notes": lambda: search_notes(args, note_book),
                 "list-notes": lambda: list_notes(note_book),
                 "delete-note": lambda: delete_note(args, note_book),
+                "add-email": lambda: add_email(args, address_book),
+                "show-email": lambda: show_email(args, address_book),
+                "change-email": lambda: change_email(args, address_book),
+                "delete-email": lambda: delete_email(args, address_book),
+                "add-address": lambda: add_address(args, address_book),
+                "show-address": lambda: show_address(args, address_book),
+                "change-address": lambda: change_address(args, address_book),
+                "delete-address": lambda: delete_address(args, address_book),
+                
                 "help": lambda: """ 
 
     add [name] [phone] [email] [address] [birthday]: Add a new contact with name and other details.
@@ -118,6 +135,22 @@ def main():
 
     add-note --title [title] --text [text]: Add a new note.
 
+    add-email [name] [email]: Add the email for the specified contact.
+
+    show-email [name]: Show the email for the specified contact.
+
+    change-email [name] [new email]: Change the email for the specified contact.
+
+    delete-email [name]: Delete the email for the specified contact.
+
+    add-address [name] [address]: Add the address for the specified contact.
+
+    show-address [name]: Show the address for the specified contact.
+
+    change-address [name] [new address]: Change the address for the specified contact.
+
+    delete-address [name]: Delete the address for the specified contact.
+
     list-notes: List all notes.
 
     get-note [ID]: Get a note by its ID.
@@ -139,7 +172,8 @@ def main():
             result = switcher.get(
                 command,
                 lambda: """Invalid command. Available commands: hello, add, add-birthday, show-birthday, change-birthday, birthdays, 
-                change-phone, delete-phone, phone, all, search, delete, add-note, get-note, edit-note, add-note-tag, delete-note-tag,
+                change-phone, delete-phone, phone, add-email, show-email, change-email, delete-email, add-address, show-address, 
+                change-address, delete-address, all, search, delete, add-note, get-note, edit-note, add-note-tag, delete-note-tag,
                 search-notes, list-notes, delete-note, close, exit & help""",
             )
 

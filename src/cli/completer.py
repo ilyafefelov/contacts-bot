@@ -11,6 +11,14 @@ commands = [
     "change-phone",
     "change-birthday",
     "phone",
+    "add-email",
+    "show-email",
+    "change-email",
+    "delete-email",
+    "add-address",
+    "show-address",
+    "change-address",
+    "delete-address",
     "all",
     "search",
     "delete",
@@ -23,8 +31,8 @@ commands = [
     "search-notes",
     "delete-note",
     "help",
-    "close", 
-    "exit"
+    "close",
+    "exit",
 ]
 
 class CommandCompleter(Completer):
