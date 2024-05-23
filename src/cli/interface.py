@@ -12,7 +12,7 @@ from colorama import Fore, Style, init
 
 init()
 
-AUTOSAVE_INTERVAL = 5  # Save after every 5 commands
+AUTOSAVE_INTERVAL = 1  # Save after every command
 
 def parse_input(user_input: str) -> Tuple[str, List[str]]:
     if not user_input.split():
