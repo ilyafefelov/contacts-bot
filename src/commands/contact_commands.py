@@ -202,6 +202,12 @@ def change_address(args, book: AddressBook) -> str:
     record.change_address(new_address)
     return "Address updated"
 
+@input_error
+def show_address(args, book: AddressBook) -> str:
+    name, *_ = args
+    record: Record = book.find(name)
+    address = record.show_address()
+    return f"{name}'s address: {address}"
 
 @input_error
 def delete_address(args, book: AddressBook) -> str:
@@ -210,10 +216,3 @@ def delete_address(args, book: AddressBook) -> str:
     record.delete_address()
     return "Address deleted"
 
-
-# book = AddressBook()
-# c = add_contact("Tom")
-# print(c)
-# print(add_email("Tom", "riine@ukr.net", book))
-# print(c)
-# print(book)
