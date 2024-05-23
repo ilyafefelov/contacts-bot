@@ -62,7 +62,7 @@ class Record:
             else "No birthday set"
         )
         email = self.email if self.email else "No email set"
-        address = self.address.value if self.address else "No address set"
+        address = self.address if self.address else "No address set"
         return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address: {address}"
 
     def change_birthday(self, new_birthday: str) -> None:
