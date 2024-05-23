@@ -184,7 +184,10 @@ def birthdays(args, book):
     days = int(args[0])
     birthdays = book.get_upcoming_birthdays(days)
     if birthdays:
-        return "Upcoming birthdays: " + ", ".join(birthdays)
+        birthdays_str = ", ".join(
+            f"{name}'s birthday is on {date}" for name, date in birthdays
+        )
+        return "Upcoming birthdays: " + birthdays_str
     else:
         return "No upcoming birthdays."
 

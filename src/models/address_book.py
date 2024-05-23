@@ -35,6 +35,6 @@ class AddressBook(UserDict):
                 days_before_birthday = (birthday_this_year - today).days
 
                 if days_before_birthday <= days:
-                    upcoming_birthdays.append(record.name.value)
+                    upcoming_birthdays.append((record.name.value, birthday_this_year))
 
         return upcoming_birthdays

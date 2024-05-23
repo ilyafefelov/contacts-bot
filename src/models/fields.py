@@ -1,5 +1,8 @@
 import re
 from datetime import datetime
+from src.models.birthday import (
+    Birthday,
+)  # this is the import is only here to fix the issue with old pickle files, that expect this class in this file
 
 class Field:
     def __init__(self, value):
@@ -24,13 +27,13 @@ class Phone(Field):
 #             raise ValueError("Invalid email format.")
 #         super().__init__(email)
 
-class Address(Field):
-    pass
+# class Address(Field):
+#     pass
 
-class Birthday(Field):
-    def __init__(self, value):
-        try:
-            self.value = datetime.strptime(value, "%d.%m.%Y").date()
-        except ValueError:
-            raise ValueError("Invalid date format. Use DD.MM.YYYY")
-        super().__init__(self.value)
+# class Birthday(Field):
+#     def __init__(self, value):
+#         try:
+#             self.value = datetime.strptime(value, "%d.%m.%Y").date()
+#         except ValueError:
+#             raise ValueError("Invalid date format. Use DD.MM.YYYY")
+#         super().__init__(self.value)
