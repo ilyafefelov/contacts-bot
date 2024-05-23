@@ -1,7 +1,8 @@
 from datetime import datetime
-from src.models.fields import Name, Phone, Birthday
+from src.models.fields import Name, Phone
 from src.models.email_ import Email
 from src.models.address import Address
+from src.models.birthday import Birthday
 from colorama import Fore, Style
 
 class Record:
