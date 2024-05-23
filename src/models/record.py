@@ -23,10 +23,10 @@ class Record:
     def add_email(self, email: str) -> str:
         self.email = Email(email)
         return f"Email {email} added to {self.name.value}."
-    
+
     def show_email(self) -> str:
         return self.email
-    
+
     def change_email(self, new_email: str) -> None:
         self.email = new_email
 
@@ -44,10 +44,10 @@ class Record:
     def add_address(self, address: str) -> str:
         self.address = Address(address)
         return f"Address added to {self.name.value}"
-    
+
     def show_address(self) -> str:
         return self.address
-    
+
     def change_address(self, new_address: str) -> None:
         self.add_address = new_address
 
@@ -65,6 +65,22 @@ class Record:
         address = self.address.value if self.address else "No address set"
         return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address: {address}"
 
+    def change_birthdate(self, new_birthday: str) -> None:
+        self.birthday = Birthday(new_birthday)
+
+    def change_phone(self, old_phone: str, new_phone: str) -> None:
+        for phone in self.phones:
+            if phone.value == old_phone:
+                phone.value = new_phone
+                return
+        raise ValueError(f"Phone {old_phone} not found for {self.name.value}")
+
+    def delete_phone(self, phone: str) -> None:
+        for p in self.phphnes:
+            if p.value == phone:
+                self.phones.remove(p)
+                return
+        raise ValueError(f"Phone {phone} not found for {self.name.value}")
 
 
 # r = Record("tom")
