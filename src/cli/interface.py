@@ -4,7 +4,7 @@ from src.commands.contact_commands import (
     add_contact, change_contact, show_phone, show_all, search_phone, delete_contact,
     add_birthday, show_birthday, birthdays
 )
-from src.commands.note_commands import add_note, search_notes, delete_note, list_notes, edit_note
+from src.commands.note_commands import add_note, search_notes, delete_note, list_notes, edit_note, get_note_by_id, add_note_tag, delete_note_tag
 from src.utils.data_handler import save_data, load_data
 from typing import List, Tuple
 import re
@@ -22,7 +22,7 @@ def parse_input(user_input: str) -> Tuple[str, List[str]]:
 
 # List of available commands
 commands = [
-    "hello", "add", "add-birthday", "show-birthday", "birthdays", "change", "phone", "all", "search", "delete", "add-note", "search-notes", "delete-note", "help"
+    "hello", "add", "add-birthday", "show-birthday", "birthdays", "change", "phone", "all", "search", "delete", "add-note", "get-note", "edit-note", "add-note-tag", "delete-note-tag", "list-notes", "search-notes", "delete-note", "help"
 ]
 
 # Creating an object for autocompletion
@@ -64,7 +64,10 @@ def main():
                 "search": lambda: search_phone(args, address_book),
                 "delete": lambda: delete_contact(args, address_book),
                 "add-note": lambda: add_note(args, note_book),
+                "get-note": lambda: get_note_by_id(args, note_book),
                 "edit-note": lambda: edit_note(args, note_book),
+                "add-note-tag": lambda: add_note_tag(args, note_book),
+                "delete-note-tag": lambda: delete_note_tag(args, note_book),
                 "search-notes": lambda: search_notes(args, note_book),
                 "list-notes": lambda: list_notes(note_book),
                 "delete-note": lambda: delete_note(args, note_book),
@@ -80,6 +83,9 @@ def main():
     delete [name]: Delete a contact.
     add-note --title [title] --text [text]: Add a new note.
     list-notes: List all notes.
+    get-note [ID]: Get a note by its ID.
+    add-note-tag --id [ID] --tag [tag]: Add a tag to a note.
+    delete-note-tag --id [ID] --tag [tag]: Delete a tag from a note.
     search-notes [text]: Find notes by text.
     edit-note --id [ID] --title [title] --text [text]: Edit a note by its ID.
     delete-note [ID]: Delete a note by its ID.
