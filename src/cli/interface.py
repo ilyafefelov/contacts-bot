@@ -1,6 +1,5 @@
 from prompt_toolkit import PromptSession
-
-from prompt_toolkit.completion import WordCompleter
+from src.cli.completer import CommandCompleter
 
 from src.commands.contact_commands import (
     add_contact,
@@ -28,7 +27,7 @@ from colorama import Fore, Style, init
 init()
 
 
-AUTOSAVE_INTERVAL = 5  # Save after every 5 commands
+AUTOSAVE_INTERVAL = 1  # Save after every command
 
 
 def parse_input(user_input: str) -> Tuple[str, List[str]]:
@@ -42,42 +41,8 @@ def parse_input(user_input: str) -> Tuple[str, List[str]]:
     return cmd, args
 
 
-# List of available commands
-
-commands = [
-    "hello",
-    "add",
-    "add-birthday",
-    "show-birthday",
-    "birthdays",
-    "change",
-    "delete-phone",
-    "change-phone",
-    "change-birthday",
-    "phone",
-    "all",
-    "search",
-    "delete",
-    "add-note",
-    "get-note",
-    "edit-note",
-    "add-note-tag",
-    "delete-note-tag",
-    "list-notes",
-    "search-notes",
-    "delete-note",
-    "help"
-]
-
-
-# Creating an object for autocompletion
-
-command_completer = WordCompleter(commands, ignore_case=True)
-
-
-# Creating a prompt_toolkit session
-
-session = PromptSession(completer=command_completer)
+# Create a PromptSession with custom completer
+session = PromptSession(completer=CommandCompleter())
 
 
 def main():
@@ -185,8 +150,6 @@ def main():
         if command_count >= AUTOSAVE_INTERVAL:
 
             save_data((address_book, note_book))
-
-            print("Autosaved address book and notebook.")
 
             command_count = 0
 
