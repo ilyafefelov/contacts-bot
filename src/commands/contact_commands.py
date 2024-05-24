@@ -92,7 +92,7 @@ def search_contact(args, book):
 
     phones = ", ".join(phone.value for phone in record.phones) if record.phones else "No phone numbers"
     emails = record.email if record.email else "No emails"
-    addresse = record.address if record.address else "No addresse"
+    address = record.address if record.address else "No address"
     birthday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
 
     contact_detail = (
@@ -100,7 +100,8 @@ def search_contact(args, book):
         f"{Fore.GREEN}Phones:{Style.RESET_ALL} {phones}\n"
         f"{Fore.GREEN}Emails:{Style.RESET_ALL} {emails}\n"
         f"{Fore.GREEN}Birthday:{Style.RESET_ALL} {birthday}\n"
-        f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{addresse}\n"
+        f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{address}\n"
+        f"=================="
     )
     return contact_detail
 
@@ -149,7 +150,11 @@ def delete_email(args, book) -> str:
 @input_error
 def show_all(book):
     if book.data:
-        return "\n".join(str(record) for record in book.data.values())
+        all = (
+            f'{"\n".join(str(record) for record in book.data.values())}\n'
+            f"=================="
+        )
+        return all
     else:
         return f"{Fore.RED}No contacts saved.{Style.RESET_ALL}"
 
