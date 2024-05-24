@@ -81,8 +81,6 @@ def delete_phone(args, book):
     return f"{Fore.YELLOW}Phone {phone} deleted from {name}.{Style.RESET_ALL}"
 
 
-
-    
 @input_error
 def search_contact(args, book):
     if len(args) != 1:
@@ -98,11 +96,11 @@ def search_contact(args, book):
     birthday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
 
     contact_detail = (
-        f"Contact name: {name}\n"
-        f"Phones: {phones}\n"
-        f"Emails: {emails}\n"
-        f"Addresses: {addresse}\n"
-        f"Birthday: {birthday}"
+        f"{Fore.GREEN}Contact name:{Style.RESET_ALL} {name}\n"
+        f"{Fore.GREEN}Phones:{Style.RESET_ALL} {phones}\n"
+        f"{Fore.GREEN}Emails:{Style.RESET_ALL} {emails}\n"
+        f"{Fore.GREEN}Birthday:{Style.RESET_ALL} {birthday}\n"
+        f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{addresse}\n"
     )
     return contact_detail
 
@@ -110,6 +108,8 @@ def search_contact(args, book):
 @input_error
 def add_email(args, book: AddressBook) -> str:
     """ add email for requested name in contacts"""
+    if len(args) != 2:
+        raise ValueError(f"{Fore.RED}Please provide contact name and email.{Style.RESET_ALL}")
     name, email, *_ = args
     record: Record = book.find(name)
     record.add_email(email)
@@ -118,6 +118,8 @@ def add_email(args, book: AddressBook) -> str:
 
 @input_error
 def show_email(args, book: AddressBook) -> str:
+    if len(args) != 1:
+        raise ValueError(f"{Fore.RED}Please provide the contact name to show_email.{Style.RESET_ALL}")
     name, *_ = args
     record: Record = book.find(name)
     email = record.show_email()
@@ -126,6 +128,8 @@ def show_email(args, book: AddressBook) -> str:
 
 @input_error
 def change_email(args, book: AddressBook) -> str:
+    if len(args) != 2:
+        raise ValueError(f"{Fore.RED}Please provide contact name and email to add.{Style.RESET_ALL}")
     name, new_email, *_ = args
     record: Record = book.find(name)
     record.change_email(new_email)
@@ -134,6 +138,8 @@ def change_email(args, book: AddressBook) -> str:
 
 @input_error
 def delete_email(args, book) -> str:
+    if len(args) != 1:
+        raise ValueError(f"{Fore.RED}Please provide contact name to delete email.{Style.RESET_ALL}")
     name, *_ = args
     record: Record = book.find(name)
     record.delete_email()
@@ -220,15 +226,19 @@ def add_address(args, book: AddressBook) -> str:
         raise ValueError(
             f"{Fore.RED} Please provide both a name and an address.{Style.RESET_ALL}"
         )
-    name, address, *_ = args
-
+    name = args[0]
+    address = " ".join(args[1:])
     try:
         record: Record = book.find(name)
     except KeyError:
         return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
     if address:
-        record.add_address(address)
-        return f"{Fore.GREEN}Address added{Style.RESET_ALL}"
+        try:
+            result = record.add_address(address)
+        except Exception:
+            return f"{Fore.RED}Please provide address according to standard: street, city, state, postcode{Style.RESET_ALL}"
+        else:
+            return  f"{Fore.GREEN}{result}{Style.RESET_ALL}"
     else:
         raise ValueError(
             f"{Fore.RED}No address found in the input string.{Style.RESET_ALL}"
@@ -237,21 +247,51 @@ def add_address(args, book: AddressBook) -> str:
 
 @input_error
 def change_address(args, book: AddressBook) -> str:
-    name, new_address, *_ = args
-    record: Record = book.find(name)
-    record.change_address(new_address)
-    return f"{Fore.GREEN}Address updated{Style.RESET_ALL}"
+    if len(args) < 2:
+        raise ValueError(
+            f"{Fore.RED} Please provide both a name and an address.{Style.RESET_ALL}"
+        )
+    name = args[0]
+    new_address = " ".join(args[1:])
+    try:
+        record: Record = book.find(name)
+    except KeyError:
+        return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
+    try:
+        result = record.change_address(new_address)
+    except Exception:
+        return "{Fore.RED}Please provide address according to standard: street, city, state, postcode{Style.RESET_ALL}"
+    else:
+        return f"{Fore.GREEN}{result}{Style.RESET_ALL}"
 
 @input_error
 def show_address(args, book: AddressBook) -> str:
+    if len(args) < 1:
+        raise ValueError(
+            f"{Fore.RED} Please provide both a name to show address.{Style.RESET_ALL}"
+        )
     name, *_ = args
-    record: Record = book.find(name)
+    try:
+        record: Record = book.find(name)
+    except KeyError:
+        return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
     address = record.show_address()
-    return f"{name}'s address: {address}"
+    address_detail = (
+            f"{name}'s address:\n"
+            f"{address}"
+            )
+    return address_detail
 
 @input_error
 def delete_address(args, book: AddressBook) -> str:
+    if len(args) < 1:
+        raise ValueError(
+            f"{Fore.RED} Please provide both a name to delete address.{Style.RESET_ALL}"
+        )
     name, *_ = args
-    record: Record = book.find(name)
+    try:
+        record: Record = book.find(name)
+    except KeyError:
+        return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
     record.delete_address()
     return f"{Fore.YELLOW}Address deleted{Style.RESET_ALL}"
