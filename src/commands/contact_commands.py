@@ -150,11 +150,12 @@ def delete_email(args, book) -> str:
 @input_error
 def show_all(book):
     if book.data:
-        all = (
-            f'{"\n".join(str(record) for record in book.data.values())}\n'
-            f"=================="
-        )
-        return all
+        all_records = "=========================\n"
+        for index, record in enumerate(book.data.values()):
+            all_records += str(record)
+            if index < len(book.data.values()) - 1:
+                all_records += "\n=========================\n"
+        return all_records
     else:
         return f"{Fore.RED}No contacts saved.{Style.RESET_ALL}"
 
