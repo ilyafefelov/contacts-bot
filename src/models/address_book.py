@@ -17,6 +17,15 @@ class AddressBook(UserDict):
         raise KeyError(f"Record for {name} not found.")
 
     def get_upcoming_birthdays(self, days=7):
+        """
+        Retrieves a list of upcoming birthdays within a specified number of days.
+
+        Args:
+            days (int): The number of days to consider for upcoming birthdays. Default is 7.
+
+        Returns:
+            list: A list of tuples containing the name and date of upcoming birthdays.
+        """
         today = datetime.today().date()
         upcoming_birthdays = []
 
@@ -35,6 +44,8 @@ class AddressBook(UserDict):
                 days_before_birthday = (birthday_this_year - today).days
 
                 if days_before_birthday <= days:
-                    upcoming_birthdays.append((record.name.value, birthday_this_year))
+                    upcoming_birthdays.append(
+                        (record.name.value, birthday_this_year.strftime("%d.%m.%Y"))
+                    )
 
         return upcoming_birthdays
