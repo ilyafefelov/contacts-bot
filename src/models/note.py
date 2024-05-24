@@ -12,7 +12,8 @@ class Note:
 
     def __str__(self):
         short_text = self.text[:30] + "..." if len(self.text) > 30 else self.text
-        return f"{self.id}. [{self.title}] {short_text}"
+        tags = ", ".join(self.tags)
+        return f"{self.id}. {self.title}: {short_text} [{tags}]"
 
     def add_tag(self, tag):
         self.tags.append(tag)
