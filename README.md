@@ -32,10 +32,10 @@ The dependencies are listed in the requirements.txt file. You can install them u
 3. Run the Project
 You can run the project using the python -m command with the module path to run the main script:
 
-```python -m path.to.main_script```
+```python -m src.main```
 
 
-4. Install the Project in Edit Mode
+4. Install the Project in Edit Mode 
 This allows you to make changes to the project and see them reflected without having to reinstall the project. You can do this with the following command:
 
 ```pip install -e .```
@@ -44,7 +44,7 @@ This allows you to make changes to the project and see them reflected without ha
 5. Run the Project in Edit Mode
 After installing the project in edit mode, you can run the project using the following command:
 
-```python -m path.to.main_script```
+```contact_bot```
 
 
 
