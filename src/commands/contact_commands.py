@@ -207,7 +207,7 @@ def add_address(args, book: AddressBook) -> str:
     """add address for requested name in contacts"""
     if len(args) < 2:
         raise ValueError(
-            f"{Fore.RED}Please provide both a name and an address.{Style.RESET_ALL}"
+            f"{Fore.RED} Please provide both a name and an address.{Style.RESET_ALL}"
         )
     name, address, *_ = args
 
