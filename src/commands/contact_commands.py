@@ -81,8 +81,6 @@ def delete_phone(args, book):
     return f"{Fore.YELLOW}Phone {phone} deleted from {name}.{Style.RESET_ALL}"
 
 
-
-    
 @input_error
 def search_contact(args, book):
     if len(args) != 1:
@@ -98,11 +96,11 @@ def search_contact(args, book):
     birthday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
 
     contact_detail = (
-        f"Contact name: {name}\n"
-        f"Phones: {phones}\n"
-        f"Emails: {emails}\n"
-        f"Addresses: {addresse}\n"
-        f"Birthday: {birthday}"
+        f"{Fore.GREEN}Contact name:{Style.RESET_ALL} {name}\n"
+        f"{Fore.GREEN}Phones:{Style.RESET_ALL} {phones}\n"
+        f"{Fore.GREEN}Emails:{Style.RESET_ALL} {emails}\n"
+        f"{Fore.GREEN}Birthday:{Style.RESET_ALL} {birthday}"
+        f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{addresse}\n"
     )
     return contact_detail
 
@@ -238,7 +236,7 @@ def add_address(args, book: AddressBook) -> str:
         try:
             result = record.add_address(address)
         except Exception:
-            return f"{Fore.RED}Please provide address according to standard: stree, city, state, postcode{Style.RESET_ALL}"
+            return f"{Fore.RED}Please provide address according to standard: street, city, state, postcode{Style.RESET_ALL}"
         else:
             return  f"{Fore.GREEN}{result}{Style.RESET_ALL}"
     else:
@@ -262,7 +260,7 @@ def change_address(args, book: AddressBook) -> str:
     try:
         result = record.change_address(new_address)
     except Exception:
-        return "{Fore.RED}Please provide address according to standard: stree, city, state, postcode{Style.RESET_ALL}"
+        return "{Fore.RED}Please provide address according to standard: street, city, state, postcode{Style.RESET_ALL}"
     else:
         return f"{Fore.GREEN}{result}{Style.RESET_ALL}"
 

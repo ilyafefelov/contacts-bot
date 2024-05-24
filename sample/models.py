@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 from colorama import Fore, Style
 
 
-
 class Field:
     def __init__(self, value):
         self.value = value
@@ -64,7 +63,6 @@ class Record:
         self.email = Email(email) if email else None
         self.birthday = Birthday(birthday) if birthday else None
 
-
     def add_phone(self, phone):
         new_phone = Phone(str(phone))
         if any(p.value == new_phone.value for p in self.phones):
@@ -109,7 +107,7 @@ class Record:
         )
         email = self.email.value if self.email else "No email set"
         address = self.address.value if self.address else "No address set"
-        return f"Contact name: {self.name.value}, phones: {phones}, birthday: {birthday}, email: {email}, address: {address}"
+        return f"Contact name: {self.name.value},\nphones: {phones},\nbirthday: {birthday},\nemail: {email},\naddress:\n{address}"
 
 
 class AddressBook(UserDict):
