@@ -23,15 +23,17 @@ class Address(Field):
         
             
     def __str__(self):
-        address_detail = (
-            f"street:      {self.address['street']}\n"
-            f"city:        {self.address['city']}\n"
-            f"postal_code: {self.address['postal_code']}\n"
-            f"state:       {self.address['state']}\n"
-            f"country:     {self.address['country']}"
-        )
-
-        return address_detail
+        if self.address:
+            address_detail = (
+                f"street:      {self.address['street']}\n"
+                f"city:        {self.address['city']}\n"
+                f"postal_code: {self.address['postal_code']}\n"
+                f"state:       {self.address['state']}\n"
+                f"country:     {self.address['country']}"
+            )
+            return address_detail
+        else:
+            return "No address set"
 
 
 

@@ -48,7 +48,8 @@ class Record:
         return self.address
 
     def change_address(self, new_address: str) -> None:
-        self.add_address = new_address
+       self.address = Address(new_address)
+       return f"Address for {self.name.value} updated"
 
     def delete_address(self) -> None:
         self.address = None
@@ -85,12 +86,3 @@ class Record:
                 return
         raise ValueError(f"Phone {phone} not found for {self.name.value}")
 
-
-# r = Record("tom")
-# print(r)
-# r.add_phone('1234567890')
-# print(r)
-# r.show_email()
-# r.change_email("fghhrk@ukr.net")
-# print(r)
-# print(r.show_email())
