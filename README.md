@@ -130,12 +130,14 @@ Show the address for the specified contact.
 ###### Change Address
 
 ```change-address [name] [new address]```
-###### Change the address for the specified contact.
+Change the address for the specified contact.
 
-Delete Address
+
+######  Delete Address
 
 ```delete-address [name]```
 Delete the address for the specified contact.
+
 
 #### Note Commands
 ###### Add Note
