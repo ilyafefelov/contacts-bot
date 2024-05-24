@@ -81,8 +81,6 @@ def delete_phone(args, book):
     return f"{Fore.YELLOW}Phone {phone} deleted from {name}.{Style.RESET_ALL}"
 
 
-
-    
 @input_error
 def search_contact(args, book):
     if len(args) != 1:
@@ -94,14 +92,14 @@ def search_contact(args, book):
 
     phones = ", ".join(phone.value for phone in record.phones) if record.phones else "No phone numbers"
     emails = record.email if record.email else "No emails"
-    addresse = record.address if record.address else "No addresse"
+    addresse = record.address if record.address else "No address"
     birthday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
 
     contact_detail = (
         f"Contact name: {name}\n"
         f"Phones: {phones}\n"
         f"Emails: {emails}\n"
-        f"Addresses: {addresse}\n"
+        f"address: {addresse}\n"
         f"Birthday: {birthday}"
     )
     return contact_detail
