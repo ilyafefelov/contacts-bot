@@ -99,7 +99,7 @@ def search_contact(args, book):
         f"{Fore.GREEN}Contact name:{Style.RESET_ALL} {name}\n"
         f"{Fore.GREEN}Phones:{Style.RESET_ALL} {phones}\n"
         f"{Fore.GREEN}Emails:{Style.RESET_ALL} {emails}\n"
-        f"{Fore.GREEN}Birthday:{Style.RESET_ALL} {birthday}"
+        f"{Fore.GREEN}Birthday:{Style.RESET_ALL} {birthday}\n"
         f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{addresse}\n"
     )
     return contact_detail

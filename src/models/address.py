@@ -1,4 +1,3 @@
-
 import pyap
 from src.models.field import Field
 
@@ -20,8 +19,7 @@ class Address(Field):
         self.__address["state"] = parsed_address.region1
         self.__address["postal_code"] = parsed_address.postal_code
         self.__address["country"] = parsed_address.country_id
-        
-            
+
     def __str__(self):
         if self.address:
             address_detail = (
@@ -29,13 +27,12 @@ class Address(Field):
                 f"city:        {self.address['city']}\n"
                 f"postal_code: {self.address['postal_code']}\n"
                 f"state:       {self.address['state']}\n"
-                f"country:     {self.address['country']}"
+                f"country:     {self.address['country']}\n"
+                f"=================="
             )
             return address_detail
         else:
             return "No address set"
-
-
 
 
 # # Driver Code
