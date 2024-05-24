@@ -191,12 +191,24 @@ def birthdays(args, book):
     else:
         return "No upcoming birthdays."
 
+
+@input_error
 def add_address(args, book: AddressBook) -> str:
-    """" add address for requested name in contacts"""
+    """add address for requested name in contacts"""
+    if len(args) < 2:
+        raise ValueError(" Please provide both a name and an address.")
     name, address, *_ = args
-    record: Record = book.find(name)
-    record.add_address(address)
-    return "Address added"
+    print(f"address: {address}")
+    try:
+        record: Record = book.find(name)
+    except KeyError:
+        return f"Record for {name} not found."
+    if address:
+        record.add_address(address)
+        return "Address added"
+    else:
+        raise ValueError(" No address found in the input string.")
+
 
 @input_error
 def change_address(args, book: AddressBook) -> str:
