@@ -1,11 +1,12 @@
 import re
 from src.models.field import Field
+from colorama import Fore
 
 class Email(Field):
     """
     creates email if valid value provided <name@domain>
     """
-    
+
     def __init__(self, email: str) -> str:
         self.__email = None
         self.email = email
@@ -20,13 +21,10 @@ class Email(Field):
         if (re.fullmatch(regex, email)):
             self.__email = email
         else:
-            raise Exception("Invalid Email")
-            
+            raise ValueError(Fore.RED + "Invalid Email" + Fore.RESET)
+
     def __str__(self):
-        return f"email: {self.email}"
-    
-
-
+        return f"{self.email}"
 
 
 # Driver Code
@@ -34,4 +32,3 @@ class Email(Field):
 #     # Enter the email
 #     email = Email("ankitrai326@gmail.com")
 #     print(email)
-
