@@ -28,7 +28,6 @@ class Address(Field):
                 f"postal_code: {self.address['postal_code']}\n"
                 f"state:       {self.address['state']}\n"
                 f"country:     {self.address['country']}\n"
-                f"=================="
             )
             return address_detail
         else:
