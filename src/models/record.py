@@ -39,6 +39,8 @@ class Record:
         return f"Birthday {birthday} added to {self.name.value}."
 
     def add_address(self, address: str) -> str:
+        if not address:
+            raise ValueError("No address provided.")
         self.address = Address(address)
         return f"Address added to {self.name.value}"
 
