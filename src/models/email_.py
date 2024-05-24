@@ -24,7 +24,7 @@ class Email(Field):
             raise ValueError(Fore.RED + "Invalid Email" + Fore.RESET)
 
     def __str__(self):
-        return f"email: {self.email}"
+        return f"{self.email}"
 
 
 # Driver Code
