@@ -28,7 +28,8 @@ class Record:
         return self.email
 
     def change_email(self, new_email: str) -> None:
-        self.email = new_email
+        self.email = Email(new_email)
+        return "Email updated"
 
     def delete_email(self) -> None:
         self.email = None
@@ -88,6 +89,6 @@ class Record:
 # r.add_phone('1234567890')
 # print(r)
 # r.show_email()
-# r.add_email("fghhrk@ukr.net")
+# r.change_email("fghhrk@ukr.net")
 # print(r)
 # print(r.show_email())
