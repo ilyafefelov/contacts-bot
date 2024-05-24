@@ -81,19 +81,30 @@ def delete_phone(args, book):
     return f"{Fore.YELLOW}Phone {phone} deleted from {name}.{Style.RESET_ALL}"
 
 
+
+    
 @input_error
-def search_phone(args, book):
+def search_contact(args, book):
     if len(args) != 1:
         raise ValueError("Please provide exactly one contact name for the search.")
     name = args[0]
     record = book.find(name)
-    if record.phones:
-        return (
-            f"{name}'s numbers are: {', '.join(phone.value for phone in record.phones)}"
-        )
-    else:
-        return f"{Fore.RED}No phone numbers found for {name}.{Style.RESET_ALL}"
+    if not record:
+        return f"{Fore.RED}No contact found with the name {name}.{Style.RESET_ALL}"
 
+    phones = ", ".join(phone.value for phone in record.phones) if record.phones else "No phone numbers"
+    emails = record.email if record.email else "No emails"
+    addresse = record.address if record.address else "No addresse"
+    birthday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
+
+    contact_detail = (
+        f"Contact name: {name}\n"
+        f"Phones: {phones}\n"
+        f"Emails: {emails}\n"
+        f"Addresses: {addresse}\n"
+        f"Birthday: {birthday}"
+    )
+    return contact_detail
 
 # EMAIL COMMANDS
 @input_error
