@@ -105,6 +105,19 @@ def delete_phone(args, book):
 
 @input_error
 def search_contact(args, book):
+    """
+    Search for a contact in the address book based on the provided arguments.
+
+    Args:
+        args (list): A list of arguments. If the list contains two elements, it is assumed to be the first and last name of the contact.
+        If the list contains only one element, it is assumed to be the name of the contact.
+        book (AddressBook): An instance of the AddressBook class representing the address book.
+
+    Returns:
+        str: A formatted string containing the search results.
+        If no contact is found, a message indicating that no contact was found is returned.
+
+    """
     # Check if the user provided a first and last name
     name = (
         args[0] + " " + args[1]
