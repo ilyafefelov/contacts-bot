@@ -9,6 +9,13 @@ def add_contact(args, book: AddressBook) -> str:
     if len(args) < 1:
         raise ValueError("Please provide a name.")
     name = args[0]
+    if len(args) > 1 and not (
+        args[1].isdigit()
+        or re.fullmatch(r"[^@]+@[^@]+\.[^@]+", args[1])
+        or re.fullmatch(r"\d{2}\.\d{2}\.\d{4}", args[1])
+    ):
+        name += " " + args[1]
+        args = args[1:]
     address = None
     phones = []
     email = None
