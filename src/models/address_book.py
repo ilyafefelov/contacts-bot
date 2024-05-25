@@ -1,5 +1,6 @@
 from collections import UserDict
 from datetime import datetime
+from src.models.record import Record
 
 class AddressBook(UserDict):
     def add_record(self, record):
@@ -9,6 +10,15 @@ class AddressBook(UserDict):
         if name in self.data:
             return self.data[name]
         raise KeyError(f"Record for {name} not found.")
+
+    def find_all(self, name):
+        # list of Record objects
+        matching_contacts: list[Record] = []
+        for record in self.data.values():
+            if name.lower() in record.name.value.lower():
+                matching_contacts.append(record)
+        matching_contacts.sort(key=lambda x: x.name.value)
+        return matching_contacts
 
     def delete(self, name):
         if name in self.data:

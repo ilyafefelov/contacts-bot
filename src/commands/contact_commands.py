@@ -4,8 +4,23 @@ from src.utils.input_error import input_error
 from colorama import Fore, Style
 import re
 
+
 @input_error
 def add_contact(args, book: AddressBook) -> str:
+    """
+    Add a new contact to the address book.
+
+    Args:
+        args (list): List of arguments passed to the command. The first argument should be the name of the contact.
+        book (AddressBook): The address book object to add the contact to.
+
+    Returns:
+        str: A message indicating whether the contact was added or updated.
+
+    Raises:
+        ValueError: If no name is provided in the arguments.
+
+    """
     if len(args) < 1:
         raise ValueError("Please provide a name.")
     name = args[0]
@@ -90,27 +105,53 @@ def delete_phone(args, book):
 
 @input_error
 def search_contact(args, book):
-    if len(args) != 1:
-        raise ValueError("Please provide exactly one contact name for the search.")
-    name = args[0]
-    record = book.find(name)
-    if not record:
-        return f"{Fore.RED}No contact found with the name {name}.{Style.RESET_ALL}"
-
-    phones = ", ".join(phone.value for phone in record.phones) if record.phones else "No phone numbers"
-    emails = record.email if record.email else "No emails"
-    address = record.address if record.address else "No address"
-    birthday = record.birthday.value.strftime("%d.%m.%Y") if record.birthday else "No birthday"
-
-    contact_detail = (
-        f"{Fore.GREEN}Contact name:{Style.RESET_ALL} {name}\n"
-        f"{Fore.GREEN}Phones:{Style.RESET_ALL} {phones}\n"
-        f"{Fore.GREEN}Emails:{Style.RESET_ALL} {emails}\n"
-        f"{Fore.GREEN}Birthday:{Style.RESET_ALL} {birthday}\n"
-        f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{address}\n"
-        f"=================="
+    # Check if the user provided a first and last name
+    name = (
+        args[0] + " " + args[1]
+        if len(args) == 2 and all(isinstance(arg, str) for arg in args)
+        else args[0]
     )
-    return contact_detail
+
+    # Search for the contact in the address book
+    search_results = book.find_all(name)
+
+    # Check if the search results are empty
+    if len(search_results) == 0:
+        res.append(f"{Fore.RED}No contact found with the name {name}.{Style.RESET_ALL}")
+        return "\n".join(res)
+
+    # Format the search results
+    res = []
+    res.append("==================")
+    res.append(f"{Fore.GREEN}Search results - {len(search_results)}:{Style.RESET_ALL}")
+    res.append("=========")
+
+    for record in search_results:
+        contact_phones = (
+            ", ".join(phone.value for phone in record.phones)
+            if record.phones
+            else "No phone numbers"
+        )
+
+        contact_emails = record.email if record.email else "No emails"
+        contact_address = record.address if record.address else "No address"
+        contact_birthday = (
+            record.birthday.value.strftime("%d.%m.%Y")
+            if record.birthday
+            else "No birthday"
+        )
+
+        contact_details = (
+            f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}Contact name:{Style.RESET_ALL}{Style.BRIGHT} {record.name}{Style.RESET_ALL}\n"
+            f"{Fore.GREEN}Phones:{Style.RESET_ALL} {contact_phones}\n"
+            f"{Fore.GREEN}Emails:{Style.RESET_ALL} {contact_emails}\n"
+            f"{Fore.GREEN}Birthday:{Style.RESET_ALL} {contact_birthday}\n"
+            f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{contact_address}\n"
+            f"===+=========+==="
+        )
+        res.append(contact_details)
+    return "\n".join(res)
+
 
 # EMAIL COMMANDS
 @input_error
