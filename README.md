@@ -74,8 +74,11 @@ Show all contacts in the address book.
 
 ###### Add Birthday
 
-```add-birthday [name] [birthday]```
+```add-birthday --[name] --[birthday]```
 Add a birthday for the specified contact.
+
+```change-birthday --[name] --[birthday]```
+Change birthday for the specified contact.
 
 ###### Show Birthday
 

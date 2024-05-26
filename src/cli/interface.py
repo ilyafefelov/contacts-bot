@@ -152,7 +152,8 @@ def main():
                     change [name] [old phone] [new phone]: Change the phone number for the specified contact.
                     phone [name]: Show phone numbers for the specified contact.
                     all: Show all contacts in the address book.
-                    add-birthday [name] [birthday]: Add a birthday for the specified contact.
+                    add-birthday --[name] --[birthday]: Add a birthday for the specified contact.
+                    change-birthday --[name] --[birthday]: Change a birthday for the specified contact.
                     show-birthday [name]: Show the birthday for the specified contact.
                     birthdays [days]: Show contacts with birthdays in the next specified number of days.
                     search [name]: Find a contact.
