@@ -332,21 +332,26 @@ def add_address(args, book: AddressBook) -> str:
 
 
 @input_error
-def change_address(args, book: AddressBook) -> str:
-    if len(args) < 2:
-        raise ValueError(
-            f"{Fore.RED} Please provide both a name and an address.{Style.RESET_ALL}"
-        )
-    name = args[0]
-    new_address = " ".join(args[1:])
+def change_address(args, book: AddressBook) -> str: 
+    contact_name, data = parse_book_command(
+        args,
+        "add-address",
+        [
+            {
+                "key_name": "address",
+                "help": "Address in format: standard: street, city, state, postcode",
+            }
+        ],
+    )
+    
     try:
-        record: Record = book.find(name)
+        record: Record = book.find(contact_name)
     except KeyError:
-        return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
+        return f"{Fore.RED}Record for {contact_name} not found.{Style.RESET_ALL}"
     try:
-        result = record.change_address(new_address)
+        result = record.change_address(data["address"])
     except Exception:
-        return "{Fore.RED}Please provide address according to standard: street, city, state, postcode{Style.RESET_ALL}"
+        return f"{Fore.RED}Please provide address according to standard: street, city, state, postcode{Style.RESET_ALL}"
     else:
         return f"{Fore.GREEN}{result}{Style.RESET_ALL}"
 
