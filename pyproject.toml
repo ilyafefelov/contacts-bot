@@ -4,12 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "contacts-bot"
-version = "0.1.0"
-description = "A contacts bot for managing contacts"
+version = "0.1.2"
+description = "A contacts bot for managing contacts and notes"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
-  { name = "Ilya Fefelov", email = "ilya@example.com" }
+  { name = "Illya Fefelov", email = "i@example.com" },
+  { name = "Kyrylo Sulimovskyi", email = "i@example.com" },
+  { name = "Valeria Bokotejova", email = "i@example.com" },
+  { name = "Tetiana Laptieva", email = "i@example.com" },
+  { name = "Margo Sharapova", email = "i@example.com" }
 ]
 classifiers = [
   "Programming Language :: Python :: 3",
@@ -17,7 +21,9 @@ classifiers = [
   "Operating System :: OS Independent"
 ]
 dependencies = [
-  "colorama>=0.4.4"
+  "colorama>=0.4.4",
+  "pyap",
+  "prompt_toolkit"
 ]
 requires-python = ">=3.6"
 
