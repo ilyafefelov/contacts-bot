@@ -247,14 +247,20 @@ def add_birthday(args, book):
 
 @input_error
 def change_birthday(args, book):
-    if len(args) != 2:
-        raise ValueError(
-            f"{Fore.RED}Please provide the contact name and the new birthday in format DD.MM.YYYY.{Style.RESET_ALL}"
-        )
-    name, new_birthday = args
-    record: Record = book.find(name)
-    record.change_birthday(new_birthday)
-    return f"{Fore.GREEN}Birthday updated{Style.RESET_ALL}"
+    contact_name, data = parse_book_command(
+        args,
+        "change-birthday",
+        [
+            {
+                "key_name": "date",
+                "help": "Birthday in format: DD.MM.YYYY",
+            }
+        ],
+    )
+    
+    record: Record = book.find(contact_name)
+    record.change_birthday(data["date"])
+    return f"{Fore.GREEN}Birthday updated to {data["date"]}{Style.RESET_ALL}"
 
 
 @input_error
