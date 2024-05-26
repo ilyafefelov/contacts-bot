@@ -2,7 +2,7 @@ import argparse
 from colorama import Fore, Style
 
 
-def parse_book_command(args, command: str, data_keys: list):
+def parse_book_command(args, command: str, data_keys: list = []):
     """
     Parses the command arguments for adding a contact to the address book.
 
@@ -35,9 +35,20 @@ def parse_book_command(args, command: str, data_keys: list):
 
     try:
         parsed = parser.parse_args(args)
-        contact_name = " ".join(parsed.name)
+        contact_name = " ".join(parsed.name) if parsed.name else None
+
+        # check if data_keys list is not empty and is iterable
+        if not data_keys or not isinstance(data_keys, list):
+            return contact_name, {}
+
         data = {
-            key["key_name"]: " ".join(getattr(parsed, key["key_name"]))
+            key["key_name"]: (
+                " ".join(
+                    getattr(parsed, key["key_name"])
+                )  # join the list of values to combine them into a single string
+                if getattr(parsed, key["key_name"])  # check if the key is not None
+                else None
+            )
             for key in data_keys
         }
 

@@ -238,7 +238,7 @@ def delete_contact(args, book):
 def add_birthday(args, book):
     contact_name, data = parse_book_command(
         args,
-        "change-birthday",
+        "add-birthday",
         [
             {
                 "key_name": "date",
@@ -335,7 +335,7 @@ def add_address(args, book: AddressBook) -> str:
 def change_address(args, book: AddressBook) -> str: 
     contact_name, data = parse_book_command(
         args,
-        "add-address",
+        "change-address",
         [
             {
                 "key_name": "address",
@@ -375,14 +375,13 @@ def show_address(args, book: AddressBook) -> str:
 
 @input_error
 def delete_address(args, book: AddressBook) -> str:
-    if len(args) < 1:
-        raise ValueError(
-            f"{Fore.RED} Please provide both a name to delete address.{Style.RESET_ALL}"
-        )
-    name, *_ = args
+    contact_name, _ = parse_book_command(
+        args,
+        "delete_address",
+    )
     try:
-        record: Record = book.find(name)
+        record: Record = book.find(contact_name)
     except KeyError:
-        return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
+        return f"{Fore.RED}Record for {contact_name} not found.{Style.RESET_ALL}"
     record.delete_address()
     return f"{Fore.YELLOW}Address deleted{Style.RESET_ALL}"
