@@ -65,6 +65,19 @@ class NoteBook(UserDict):
         return note.add_tag(tag)
 
     def __get_snippet(self, text, start_idx, length, text_type):
+        """
+        Returns a snippet of the given text based on the start index and length.
+
+        Args:
+            text (str): The original text.
+            start_idx (int): The starting index of the snippet.
+            length (int): The desired length of the snippet.
+            text_type (str): The type of the text (e.g., title, description).
+
+        Returns:
+            str: The snippet of the text.
+
+        """
         if len(text) <= length:
             return f"{text_type}: {text}"
 
