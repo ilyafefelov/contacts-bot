@@ -4,28 +4,47 @@ import re
 
 class NoteBook(UserDict):
     def generate_id(self):
+        """
+        Generates a unique ID for a new entry in the note book.
+
+        Returns:
+            int: The generated ID.
+        """
         return max(self.data.keys(), default=0) + 1
 
     def add_record(self, note):
         self.data[note.get_id()] = note
 
     def search(self, needle):
+        """
+        Search for notes that match the given needle.
+
+        Args:
+            needle (str): The search term to match against note titles, text, and tags.
+
+        Returns:
+            list: A list of strings representing the matching notes, including their IDs, titles, and snippets.
+        """
         pattern = re.compile(re.escape(needle), re.IGNORECASE)
         results = []
         for note in self.data.values():
             title_match = pattern.search(note.title)
             text_match = pattern.search(note.text)
             tags_match = pattern.search(" ".join(note.tags))
-            snippet = ''
+            snippet = ""
             if title_match:
-                snippet = self.__get_snippet(note.title, title_match.start(), 30, 'title')
+                snippet = self.__get_snippet(
+                    note.title, title_match.start(), 30, "title"
+                )
             elif text_match:
-                snippet = self.__get_snippet(note.text, text_match.start(), 30, 'text')
+                snippet = self.__get_snippet(note.text, text_match.start(), 30, "text")
             elif tags_match:
-                snippet = self.__get_snippet(" ".join(note.tags), tags_match.start(), 30, 'tags')
+                snippet = self.__get_snippet(
+                    " ".join(note.tags), tags_match.start(), 30, "tags"
+                )
 
             if snippet:
-                results.append(f"{note.get_id()}. \"{note.title}\" ({snippet})")
+                results.append(f'{note.get_id()}. "{note.title}" ({snippet})')
         return results
 
     def get_list(self):
