@@ -119,7 +119,7 @@ Delete the email for the specified contact.
 
 ###### Add Address
 
-```add-address [name] [address]```
+```add-address --[name] --[address]```
 Add the address for the specified contact.
 
 ###### Show Address

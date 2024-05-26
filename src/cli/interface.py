@@ -162,7 +162,7 @@ def main():
                     show-email [name]: Show the email for the specified contact.
                     change-email [name] [new email]: Change the email for the specified contact.
                     delete-email [name]: Delete the email for the specified contact.
-                    add-address [name] [address]: Add the address for the specified contact.
+                    add-address --[name] --[address]: Add the address for the specified contact.
                     show-address [name]: Show the address for the specified contact.
                     change-address [name] [new address]: Change the address for the specified contact.
                     delete-address [name]: Delete the address for the specified contact.

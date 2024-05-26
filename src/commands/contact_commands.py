@@ -1,8 +1,10 @@
 from src.models.address_book import AddressBook
 from src.models.record import Record
 from src.utils.input_error import input_error
+from src.utils.command_parser import parse_book_command
 from colorama import Fore, Style
 import re
+import argparse
 
 
 @input_error
@@ -288,20 +290,24 @@ def birthdays(args, book):
 
 @input_error
 def add_address(args, book: AddressBook) -> str:
-    """add address for requested name in contacts"""
-    if len(args) < 2:
-        raise ValueError(
-            f"{Fore.RED} Please provide both a name and an address.{Style.RESET_ALL}"
-        )
-    name = args[0]
-    address = " ".join(args[1:])
+    contact_name, data = parse_book_command(
+        args,
+        "add-address",
+        [
+            {
+                "key_name": "address",
+                "help": "Address in format: standard: street, city, state, postcode",
+            }
+        ],
+    )
+
     try:
-        record: Record = book.find(name)
+        record: Record = book.find(contact_name)
     except KeyError:
-        return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
-    if address:
+        return f"{Fore.RED}Record for {contact_name} not found.{Style.RESET_ALL}"
+    if data["address"]:
         try:
-            result = record.add_address(address)
+            result = record.add_address(data["address"])
         except Exception:
             return f"{Fore.RED}Please provide address according to standard: street, city, state, postcode{Style.RESET_ALL}"
         else:
