@@ -15,7 +15,7 @@ def parse_book_command(args, command: str, data_keys: list):
         tuple: A tuple containing the contact name and a dictionary of contact data.
 
     Raises:
-        ValueError: If the input is invalid and does not provide the name and address.
+        ValueError: If the input is invalid and does not provide the name and expected arguments.
     """
 
     combined_args_text = " ".join(
@@ -40,11 +40,10 @@ def parse_book_command(args, command: str, data_keys: list):
             key["key_name"]: " ".join(getattr(parsed, key["key_name"]))
             for key in data_keys
         }
-        print("DATA:", data)
 
-        # return contact_name, data
         return contact_name, data
+
     except SystemExit:
         raise ValueError(
-            f"{Fore.YELLOW} Invalid input. Please provide the name and address.{Style.RESET_ALL}"
+            f"{Fore.YELLOW} Invalid input. Please provide the name and expected arguments.{Style.RESET_ALL}"
         )
