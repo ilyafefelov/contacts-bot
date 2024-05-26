@@ -33,7 +33,7 @@ def add_contact(args, book: AddressBook) -> str:
     ):
         name += " " + args[1]
         args = args[1:]
-    address = None
+    address = ''
     phones = []
     email = None
     birthday = None
@@ -47,8 +47,8 @@ def add_contact(args, book: AddressBook) -> str:
             email = arg
         elif re.fullmatch(r"\d{2}\.\d{2}\.\d{4}", arg):
             birthday = arg
-        else:
-            address = arg
+        # else:
+        #     address.__add__(arg)
     try:
         record = book.find(name)
         message = "Contact updated."
@@ -73,36 +73,52 @@ def add_contact(args, book: AddressBook) -> str:
 # PHONE COMMANDS
 @input_error
 def change_phone(args, book):
-    if len(args) != 3:
-        raise ValueError(
-            f"{Fore.RED} Please provide the contact name, old phone number, and new phone number.{Style.RESET_ALL}"
-        )
-    name, old_phone, new_phone = args
-    record: Record = book.find(name)
-    return record.change_phone(old_phone, new_phone)
+    contact_name, data = parse_book_command(
+        args,
+        "change-phone",
+        [
+            {
+                "key_name": "oldphone",
+                "help": "10 digit phone number to delete.",
+            },
+            {
+                "key_name": "newphone",
+                "help": "10 digit phone number to add.",
+            },
+        ],
+    )
+    
+    record: Record = book.find(contact_name)
+    return record.change_phone(data['oldphone'], data['newphone'])
 
 
 @input_error
 def show_phone(args, book):
-    if len(args) != 1:
-        raise ValueError(
-            f"{Fore.RED} Please provide exactly one contact name.{Style.RESET_ALL}"
-        )
-    name = args[0]
-    record = book.find(name)
-    return f"{name}'s numbers are: {', '.join(phone.value for phone in record.phones)}"
+    contact_name, *_ = parse_book_command(
+        args,
+        "show-phone",
+    )
+    
+    record = book.find(contact_name)
+    return f"{contact_name}'s numbers are: {', '.join(phone.value for phone in record.phones)}"
 
 
 @input_error
 def delete_phone(args, book):
-    if len(args) != 2:
-        raise ValueError(
-            f"{Fore.RED} Please provide the contact name and the phone number to delete.{Style.RESET_ALL}"
-        )
-    name, phone = args
-    record = book.find(name)
-    record.delete_phone(phone)
-    return f"{Fore.YELLOW}Phone {phone} deleted from {name}.{Style.RESET_ALL}"
+    contact_name, data = parse_book_command(
+        args,
+        "delete-phone",
+        [
+            {
+                "key_name": "phone",
+                "help": "10 digit phone number to delete.",
+            }
+        ],
+    )
+    
+    record = book.find(contact_name)
+    record.delete_phone(data['phone'])
+    return f"{Fore.YELLOW}Phone {data['phone']} deleted from {contact_name}.{Style.RESET_ALL}"
 
 
 @input_error
@@ -172,40 +188,56 @@ def search_contact(args, book):
 @input_error
 def add_email(args, book: AddressBook) -> str:
     """ add email for requested name in contacts"""
-    if len(args) != 2:
-        raise ValueError(f"{Fore.RED}Please provide contact name and email.{Style.RESET_ALL}")
-    name, email, *_ = args
-    record: Record = book.find(name)
-    record.add_email(email)
+    contact_name, data = parse_book_command(
+        args,
+        "add-email",
+        [
+            {
+                "key_name": "email",
+                "help": "New email address to add.",
+            }
+        ],
+    )
+    record: Record = book.find(contact_name)
+    record.add_email(data['email'])
     return f"{Fore.GREEN}Email added{Style.RESET_ALL}"
 
 
 @input_error
 def show_email(args, book: AddressBook) -> str:
-    if len(args) != 1:
-        raise ValueError(f"{Fore.RED}Please provide the contact name to show_email.{Style.RESET_ALL}")
-    name, *_ = args
-    record: Record = book.find(name)
+    contact_name, *_ = parse_book_command(
+        args,
+        "show_email",
+    )
+    record: Record = book.find(contact_name)
     email = record.show_email()
-    return f"{name}'s email: {email}"
+    return f"{contact_name}'s email: {email}"
 
 
 @input_error
 def change_email(args, book: AddressBook) -> str:
-    if len(args) != 2:
-        raise ValueError(f"{Fore.RED}Please provide contact name and email to add.{Style.RESET_ALL}")
-    name, new_email, *_ = args
-    record: Record = book.find(name)
-    record.change_email(new_email)
+    contact_name, data = parse_book_command(
+        args,
+        "change-email",
+        [
+            {
+                "key_name": "email",
+                "help": "New email address",
+            }
+        ],
+    )
+    record: Record = book.find(contact_name)
+    record.change_email(data["email"])
     return f"{Fore.GREEN}Email updated{Style.RESET_ALL}"
 
 
 @input_error
 def delete_email(args, book) -> str:
-    if len(args) != 1:
-        raise ValueError(f"{Fore.RED}Please provide contact name to delete email.{Style.RESET_ALL}")
-    name, *_ = args
-    record: Record = book.find(name)
+    contact_name, *_ = parse_book_command(
+        args,
+        "delete_email",
+    )
+    record: Record = book.find(contact_name)
     record.delete_email()
     return f"{Fore.YELLOW}Email deleted{Style.RESET_ALL}"
 
@@ -225,13 +257,13 @@ def show_all(book):
 
 @input_error
 def delete_contact(args, book):
-    if len(args) != 1:
-        raise ValueError(
-            f"{Fore.RED}Please provide exactly one contact name to delete.{Style.RESET_ALL}"
-        )
-    name = args[0]
-    result = book.delete(name)
-    return f"{Fore.YELLOW}Contact {name} deleted successfully.{Style.RESET_ALL}"
+    contact_name, *_ = parse_book_command(
+        args,
+        "delete_contact",
+    )
+    
+    result = book.delete(contact_name)
+    return f"{Fore.YELLOW}Contact {contact_name} deleted successfully.{Style.RESET_ALL}"
 
 
 @input_error
@@ -272,16 +304,16 @@ def change_birthday(args, book):
 
 @input_error
 def show_birthday(args, book):
-    if len(args) != 1:
-        raise ValueError(
-            f"{Fore.RED}Please provide exactly one contact name.{Style.RESET_ALL}"
-        )
-    name = args[0]
-    record = book.find(name)
+    contact_name, *_ = parse_book_command(
+        args,
+        "show_birthday",
+    )
+    
+    record = book.find(contact_name)
     if record.birthday:
-        return f"{Fore.MAGENTA}{name}'s birthday is on {record.birthday.value.strftime('%d.%m.%Y')}.{Style.RESET_ALL}"
+        return f"{Fore.MAGENTA}{contact_name}'s birthday is on {record.birthday.value.strftime('%d.%m.%Y')}.{Style.RESET_ALL}"
     else:
-        return f"{Fore.RED}No birthday found for {name}.{Style.RESET_ALL}"
+        return f"{Fore.RED}No birthday found for {contact_name}.{Style.RESET_ALL}"
 
 
 @input_error
@@ -357,18 +389,18 @@ def change_address(args, book: AddressBook) -> str:
 
 @input_error
 def show_address(args, book: AddressBook) -> str:
-    if len(args) < 1:
-        raise ValueError(
-            f"{Fore.RED} Please provide both a name to show address.{Style.RESET_ALL}"
-        )
-    name, *_ = args
+    contact_name, *_ = parse_book_command(
+        args,
+        "show_address",
+    )
+    
     try:
-        record: Record = book.find(name)
+        record: Record = book.find(contact_name)
     except KeyError:
-        return f"{Fore.RED}Record for {name} not found.{Style.RESET_ALL}"
+        return f"{Fore.RED}Record for {contact_name} not found.{Style.RESET_ALL}"
     address = record.show_address()
     address_detail = (
-            f"{name}'s address:\n"
+            f"{contact_name}'s address:\n"
             f"{address}"
             )
     return address_detail

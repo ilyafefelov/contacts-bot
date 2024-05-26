@@ -148,25 +148,25 @@ def main():
                 "change-address": lambda: change_address(args, address_book),
                 "delete-address": lambda: delete_address(args, address_book),
                 "help": lambda: """
-                    add [name] [phone] [email] [address] [birthday]: Add a new contact with name and other details.
-                    change [name] [old phone] [new phone]: Change the phone number for the specified contact.
-                    phone [name]: Show phone numbers for the specified contact.
+                    add [name] [phone] [email] [birthday]: Add a new contact with name and other details.
+                    change --[name] --[old phone] --[new phone]: Change the phone number for the specified contact.
+                    phone --[name]: Show phone numbers for the specified contact.
                     all: Show all contacts in the address book.
                     add-birthday --[name] --[birthday]: Add a birthday for the specified contact.
                     change-birthday --[name] --[birthday]: Change a birthday for the specified contact.
-                    show-birthday [name]: Show the birthday for the specified contact.
+                    show-birthday --[name]: Show the birthday for the specified contact.
                     birthdays [days]: Show contacts with birthdays in the next specified number of days.
                     search [name]: Find a contact.
-                    delete [name]: Delete a contact.
+                    delete --[name]: Delete a contact.
                     add-note --title [title] --text [text]: Add a new note.
-                    add-email [name] [email]: Add the email for the specified contact.
-                    show-email [name]: Show the email for the specified contact.
-                    change-email [name] [new email]: Change the email for the specified contact.
-                    delete-email [name]: Delete the email for the specified contact.
+                    add-email --[name] --[email]: Add the email for the specified contact.
+                    show-email --[name]: Show the email for the specified contact.
+                    change-email --[name] --[new email]: Change the email for the specified contact.
+                    delete-email --[name]: Delete the email for the specified contact.
                     add-address --[name] --[address]: Add the address for the specified contact.
-                    show-address [name]: Show the address for the specified contact.
+                    show-address --[name]: Show the address for the specified contact.
                     change-address --[name] --[new address]: Change the address for the specified contact.
-                    delete-address [name]: Delete the address for the specified contact.
+                    delete-address --[name]: Delete the address for the specified contact.
                     list-notes: List all notes.
                     get-note [ID]: Get a note by its ID.
                     add-note-tag --id [ID] --tag [tag]: Add a tag to a note.
