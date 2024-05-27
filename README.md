@@ -47,6 +47,15 @@ After installing the project in edit mode, you can run the project using the fol
 ```contact_bot```
 
 
+###### or just:
+```
+git clone https://github.com/ilyafefelov/contacts-bot
+pip install contacts-bot
+cls
+contact_bot
+```
+
+
 
 ### CLI Commands
 Below is a detailed list of available commands and their usage:
