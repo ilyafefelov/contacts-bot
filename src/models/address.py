@@ -13,6 +13,7 @@ class Address(Field):
 
     @address.setter
     def address(self, address):
+        self.__address = {}  # Reset the address dictionary before assigning new values
         parsed_address = pyap.parse(address, country='US')[0]
         self.__address["street"] = parsed_address.street_number + " " + parsed_address.street_name
         self.__address["city"] = parsed_address.city
@@ -25,14 +26,13 @@ class Address(Field):
             address_detail = (
                 f"street:      {self.address['street']}\n"
                 f"city:        {self.address['city']}\n"
-                f"postal_code: {self.address['postal_code']}\n"
+                f"postal code: {self.address['postal_code']}\n"
                 f"state:       {self.address['state']}\n"
                 f"country:     {self.address['country']}\n"
             )
             return address_detail
         else:
             return "No address set"
-
 
 # # Driver Code
 # if __name__ == '__main__':

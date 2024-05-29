@@ -153,7 +153,9 @@ def search_contact(args, book):
 
     # Format the search results
     res = []
-    res.append("==================")
+    res.append("=================")
+    res.append("= = = = = = = = =")
+    res.append("=================")
     res.append(f"{Fore.GREEN}Search results - {len(search_results)}:{Style.RESET_ALL}")
     res.append("=========")
 
@@ -245,11 +247,21 @@ def delete_email(args, book) -> str:
 @input_error
 def show_all(book):
     if book.data:
-        all_records = "=========================\n"
+        all_records = f"========There are {len(book.data.values())} contacts=========\n"
         for index, record in enumerate(book.data.values()):
-            all_records += str(record)
-            if index < len(book.data.values()) - 1:
-                all_records += "\n=========================\n"
+            check_phones = f"{Fore.GREEN}Phones:{Style.RESET_ALL} {', '.join(phone.value for phone in record.phones)}\n" if record.phones else f"{Fore.MAGENTA}No phones{Style.RESET_ALL}\n"
+            check_address = f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{record.address}\n" if record.address else f"{Fore.MAGENTA}No address{Style.RESET_ALL}\n"
+            check_email = f"{Fore.GREEN}Email:{Style.RESET_ALL}\n{record.email}\n" if record.email else f"{Fore.MAGENTA}No email{Style.RESET_ALL}\n"
+            check_birthday = f"{Fore.GREEN}Birthday:{Style.RESET_ALL}\n{record.birthday}\n" if record.birthday else f"{Fore.MAGENTA}No birthday{Style.RESET_ALL}\n"
+            all_records += (
+                f"{Fore.LIGHTMAGENTA_EX}{Style.BRIGHT}{index+1}. Contact name:{Style.RESET_ALL}{Style.BRIGHT} {record.name}{Style.RESET_ALL}\n"
+                f"{check_phones}"
+                f"{check_email}"
+                f"{check_birthday}"
+                f"{check_address}"
+                f"{Fore.GREEN}-- -- -- -- -- --{Style.RESET_ALL}\n"
+            )
+            
         return all_records
     else:
         return f"{Fore.RED}No contacts saved.{Style.RESET_ALL}"
