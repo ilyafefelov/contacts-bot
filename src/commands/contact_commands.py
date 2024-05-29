@@ -247,7 +247,9 @@ def delete_email(args, book) -> str:
 @input_error
 def show_all(book):
     if book.data:
-        all_records = f"========There are {len(book.data.values())} contacts=========\n"
+        all_records = f"===============================\n"
+        all_records += f"=====There are {len(book.data.values())} contacts=====\n"
+        all_records += f"===============================\n"
         for index, record in enumerate(book.data.values()):
             check_phones = f"{Fore.GREEN}Phones:{Style.RESET_ALL} {', '.join(phone.value for phone in record.phones)}\n" if record.phones else f"{Fore.MAGENTA}No phones{Style.RESET_ALL}\n"
             check_address = f"{Fore.GREEN}Address:{Style.RESET_ALL}\n{record.address}\n" if record.address else f"{Fore.MAGENTA}No address{Style.RESET_ALL}\n"
