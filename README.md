@@ -47,6 +47,15 @@ After installing the project in edit mode, you can run the project using the fol
 ```contact_bot```
 
 
+###### or just:
+```
+git clone https://github.com/ilyafefelov/contacts-bot
+pip install contacts-bot
+cls
+contact_bot
+```
+
+
 
 ### CLI Commands
 Below is a detailed list of available commands and their usage:
@@ -54,17 +63,17 @@ Below is a detailed list of available commands and their usage:
 Contact Commands
 ###### Add Contact
 
-```add [name] [phone] [email] [address] [birthday]```
+```add [name] [phone] [email] [birthday]```
 Add a new contact with the specified name and other details.
 
 ###### Change Phone Number
 
-```change-phone [name] [old phone] [new phone]```
+```change-phone --[name] --[old phone] --[new phone]```
 Change the phone number for the specified contact.
 
 ###### Show Phone Numbers
 
-```phone [name]```
+```phone --[name]```
 Show phone numbers for the specified contact.
 
 ###### Show All Contacts
@@ -74,12 +83,15 @@ Show all contacts in the address book.
 
 ###### Add Birthday
 
-```add-birthday [name] [birthday]```
+```add-birthday --[name] --[birthday]```
 Add a birthday for the specified contact.
+
+```change-birthday --[name] --[birthday]```
+Change birthday for the specified contact.
 
 ###### Show Birthday
 
-```show-birthday [name]```
+```show-birthday --[name]```
 Show the birthday for the specified contact.
 
 ###### Show Upcoming Birthdays
@@ -94,48 +106,48 @@ Find a contact by name.
 
 ###### Delete Contact
 
-```delete [name]```
+```delete --[name]```
 Delete a contact by name.
 
 ###### Add Email
 
-```add-email [name] [email]```
+```add-email --[name] --[email]```
 Add an email for the specified contact.
 
 ###### Show Email
 
-```show-email [name]```
+```show-email --[name]```
 Show the email for the specified contact.
 
 ###### Change Email
 
-```change-email [name] [new email]```
+```change-email --[name] --[new email]```
 Change the email for the specified contact.
 
 ###### Delete Email
 
-```delete-email [name]```
+```delete-email --[name]```
 Delete the email for the specified contact.
 
 ###### Add Address
 
-```add-address [name] [address]```
+```add-address --[name] --[address]```
 Add the address for the specified contact.
 
 ###### Show Address
 
-```show-address [name]```
+```show-address --[name]```
 Show the address for the specified contact.
 
 ###### Change Address
 
-```change-address [name] [new address]```
+```change-address --[name] --[new address]```
 Change the address for the specified contact.
 
 
 ######  Delete Address
 
-```delete-address [name]```
+```delete-address --[name]```
 Delete the address for the specified contact.
 
 
