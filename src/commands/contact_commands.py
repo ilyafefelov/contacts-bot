@@ -137,22 +137,20 @@ def search_contact(args, book):
 
     """
     # Check if the user provided a first and last name
-    name = (
-        args[0] + " " + args[1]
-        if len(args) == 2 and all(isinstance(arg, str) for arg in args)
-        else args[0]
-    )
+    if len(args) < 1:
+        raise ValueError("Please provide the search text.")
+    name = " ".join(args)
 
     # Search for the contact in the address book
     search_results = book.find_all(name)
 
+    res = []
     # Check if the search results are empty
     if len(search_results) == 0:
         res.append(f"{Fore.RED}No contact found with the name {name}.{Style.RESET_ALL}")
         return "\n".join(res)
 
     # Format the search results
-    res = []
     res.append("=================")
     res.append("= = = = = = = = =")
     res.append("=================")
